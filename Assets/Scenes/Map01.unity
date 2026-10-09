@@ -3197,6 +3197,10 @@ MonoBehaviour:
   navalUnitData:
   - {fileID: 11400000, guid: c2b629827c9821d4185b71e921d8e2b9, type: 2}
   - {fileID: 11400000, guid: 7a2216c04fddf454f9d2e84a0c848308, type: 2}
+  - {fileID: 11400000, guid: 1b20b633a88b4d969ae843801c3d2812, type: 2}
+  - {fileID: 11400000, guid: 3e90eaa365794d4ab05458f1f7447f39, type: 2}
+  - {fileID: 11400000, guid: 3284e3851659496bb5a52c6fd28bc53c, type: 2}
+  - {fileID: 11400000, guid: 1ca5ec64f8c548a3bfc5e5ada562ce05, type: 2}
   playerTurn: 1
   gameTurn: 1
   nativeTownNum: 0
