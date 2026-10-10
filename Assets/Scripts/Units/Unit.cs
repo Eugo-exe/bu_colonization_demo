@@ -89,6 +89,22 @@ public class Unit : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     protected GameManager gameMgr;
 
+    protected void RefreshPointerCollider()
+    {
+        // Physics2DRaycaster reads sorting from the renderer on the collider object.
+        // Keep the pointer target on the visible sprite so it also hides with passengers.
+        var rootCollider = GetComponent<Collider2D>();
+        if (rootCollider != null)
+            rootCollider.enabled = false;
+
+        var spriteCollider = unitSprite.GetComponent<BoxCollider2D>();
+        if (spriteCollider == null)
+            spriteCollider = unitSprite.gameObject.AddComponent<BoxCollider2D>();
+
+        spriteCollider.offset = unitSprite.sprite.bounds.center;
+        spriteCollider.size = unitSprite.sprite.bounds.size;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -150,12 +166,65 @@ public class Unit : MonoBehaviour, IPointerClickHandler
         {
             if (faction == gameMgr.PlayerFaction)
             {
+                if (this == gameMgr.CurUnit)
+                {
+                    // The selected sprite's hit box can cover an adjacent own unit.
+                    var hits = new System.Collections.Generic.List<RaycastResult>();
+                    EventSystem.current.RaycastAll(eventData, hits);
+                    Hex pointedHex = null;
+                    foreach (var hit in hits)
+                    {
+                        pointedHex = hit.gameObject.GetComponent<Hex>();
+                        if (pointedHex != null)
+                            break;
+                    }
+                    foreach (var hit in hits)
+                    {
+                        Unit pointedUnit = hit.gameObject.GetComponentInParent<Unit>();
+                        if (pointedUnit != null && pointedUnit != this && pointedUnit.Faction == gameMgr.PlayerFaction
+                            && pointedUnit.CurHex == pointedHex)
+                        {
+                            ExecuteEvents.ExecuteHierarchy(hit.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+                            return;
+                        }
+                    }
+                }
                 gameMgr.SelectPlayerUnit(this);
             }
         }
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            if (gameMgr.CurUnit == null)
+                return;
+
+            // A selected sprite can overlap a neighbouring hex. Resolve the hex
+            // under that pointer while preserving clicks on other units.
+            if (this == gameMgr.CurUnit)
+            {
+                var hits = new System.Collections.Generic.List<RaycastResult>();
+                EventSystem.current.RaycastAll(eventData, hits);
+                foreach (var hit in hits)
+                {
+                    Unit pointedUnit = hit.gameObject.GetComponentInParent<Unit>();
+                    if (pointedUnit != null && pointedUnit != this)
+                    {
+                        ExecuteEvents.ExecuteHierarchy(hit.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+                        return;
+                    }
+                }
+                foreach (var hit in hits)
+                {
+                    Hex pointedHex = hit.gameObject.GetComponent<Hex>();
+                    if (pointedHex == null)
+                        continue;
+                    if (gameMgr.CheckIfHexIsAdjacent(curHex, pointedHex))
+                        PrepareMoveToHex(pointedHex);
+                    return;
+                }
+                return;
+            }
+
             if (gameMgr.CheckIfHexIsAdjacent(gameMgr.CurUnit.CurHex, curHex))
             {
                 if (faction == gameMgr.PlayerFaction)//same side unit

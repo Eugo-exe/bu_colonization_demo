@@ -44,6 +44,7 @@ public class NavalUnit : Unit
         strength = data.strength;
         visualRange = data.visualRange;
         unitSprite.sprite = data.shipIcon;
+        RefreshPointerCollider();
 
         navalUnitType = data.navalUnitType;
         armed = data.armed;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -43,7 +44,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (townPanel.activeSelf && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            ToggleTownPanel(false);
     }
 
     public void SetupHexSlots(Hex centerHex, Hex[] aroundHexes)
@@ -71,6 +73,8 @@ public class UIManager : MonoBehaviour
         {
             if (unit.UnitStatus == UnitStatus.WorkInField)
                 unit.gameObject.SetActive(false);
+            else if (unit.UnitStatus == UnitStatus.None)
+                unit.gameObject.SetActive(true);
         }
     }
 
@@ -122,6 +126,7 @@ public class UIManager : MonoBehaviour
 
     public void SetupCurrentTown(Hex curHex, Hex[] aroundHexes)
     {
+        DestroyOldUnitDrag();
         SetupHexSlots(curHex, aroundHexes);
         SetupUnitDragOutsideTown(curHex);
         SetupUnitDragWorkingInTerrain();

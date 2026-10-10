@@ -114,6 +114,7 @@ public class Hex : MonoBehaviour, IPointerClickHandler
     public int YieldID { get { return yieldId; } set { yieldId = value; } }
 
     private GameManager gameMgr;
+    private bool fogOfWarEnabled;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -146,6 +147,8 @@ public class Hex : MonoBehaviour, IPointerClickHandler
         this.y = y;
         this.pos = pos;
         this.gameMgr = gameMgr;
+        // Preserve the prefab's fog setting for the all-visible assignment map.
+        fogOfWarEnabled = fogSprite.gameObject.activeSelf || darkSprite.gameObject.activeSelf;
 
         hexText.text = $"{x},{y}";
 
@@ -203,12 +206,12 @@ public class Hex : MonoBehaviour, IPointerClickHandler
 
     private void ToggleFog(bool flag)
     {
-        fogSprite.gameObject.SetActive(flag);
+        fogSprite.gameObject.SetActive(fogOfWarEnabled && flag);
     }
 
     private void ToggleDark(bool flag)
     {
-        darkSprite.gameObject.SetActive(flag);
+        darkSprite.gameObject.SetActive(fogOfWarEnabled && flag);
     }
 
     public void DiscoverHex()
@@ -222,13 +225,16 @@ public class Hex : MonoBehaviour, IPointerClickHandler
     {
         ToggleFog(true);
         ToggleDark(false);
-        visible = false;
+        visible = !fogOfWarEnabled;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            if (gameMgr.CurUnit == null)
+                return;
+
             //Debug.Log($"Right Click-Hex:{x}, {y}");
             if (gameMgr.CheckIfHexIsAdjacent(gameMgr.CurUnit.CurHex, this))
             {

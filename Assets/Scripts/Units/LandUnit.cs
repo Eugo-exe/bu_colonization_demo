@@ -87,6 +87,7 @@ public class LandUnit : Unit
         strength = data.strength;
         visualRange = data.visualRange;
         unitSprite.sprite = data.unitIcon;
+        RefreshPointerCollider();
         unitStatus = UnitStatus.None;
 
         landUnitType = data.landUnitType;
