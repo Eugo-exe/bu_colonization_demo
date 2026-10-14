@@ -48,4 +48,4 @@ The existing enum's values 0–11 are preserved explicitly. Eight occupation nam
 
 ## Historical scope still outside this update
 
-This is a contextual review of retained assignment art, not certification that every detail is historically reconstructed. Existing generic Indigenous land images, shared ship images containing English markings, and contemporary Native faction UI symbols are unchanged. In particular, those UI symbols must not be described as attested colonial-era flags. See the retained limitations in [README.md](README.md).
+This is a contextual review of retained assignment art, not certification that every detail is historically reconstructed. Existing generic Indigenous land images, shared ship images containing English markings, and contemporary Native faction UI symbols are unchanged. In particular, those UI symbols must not be described as attested colonial-era flags. See the retained limitations in [project notes](docs/PROJECT_NOTES.md).

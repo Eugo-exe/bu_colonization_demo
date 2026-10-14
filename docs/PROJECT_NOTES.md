@@ -1,6 +1,6 @@
 # Colonization assignment checkpoint
 
-**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid and legal-move highlights are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. All 20 land unit images are now connected to the existing data catalog. The artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
+**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid and legal-move highlights are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo). All 20 land unit images are now connected to the existing data catalog. The artwork limitations below remain outstanding. See [interaction verification](../INTERACTION_VERIFICATION.md).
 
 The committed project version remains **6000.3.19f1**. Earlier asset validation used Unity **6000.3.26f1** in a separate working copy with pre-existing local upgrades. Unrelated Unity-version, render-setting and package-version upgrades are excluded from this checkpoint. The exact published project tree has not been reimported with its declared editor version.
 
@@ -8,7 +8,7 @@ The committed project version remains **6000.3.19f1**. Earlier asset validation 
 
 `Assets/Textures/AssignmentArtwork` contains 11 terrain PNGs, 7 forest PNGs, 20 land unit PNGs, 6 naval PNGs and 13 faction PNGs. Texture2D sources are imported as single Sprites. `asset-manifest.json` records provenance, GUIDs, dimensions and committed-byte hashes; text metadata hashes use LF line endings.
 
-Runtime data contains 11 Hex SO, **20 Land SO**, 6 Naval SO and 13 Faction SO. All **20 land enum entries** have a distinct sprite and are registered in Map01 using the original LandUnitData class, GameManager array and LandUnit prefab. Values 0–11 remain stable; eight missing names are appended as 12–19. The original five land data assets and starting ship/passenger/native composition are unchanged. The new data does not add profession bonuses or a recruitment system. See [land integration verification](LAND_UNIT_VERIFICATION.md) and [historical sources and scope](LAND_UNIT_REFERENCES.md). Four additional naval SO remain registered in Map01.
+Runtime data contains 11 Hex SO, **20 Land SO**, 6 Naval SO and 13 Faction SO. All **20 land enum entries** have a distinct sprite and are registered in Map01 using the original LandUnitData class, GameManager array and LandUnit prefab. Values 0–11 remain stable; eight missing names are appended as 12–19. The original five land data assets and starting ship/passenger/native composition are unchanged. The new data does not add profession bonuses or a recruitment system. See [land integration verification](../LAND_UNIT_VERIFICATION.md) and [historical sources and scope](../LAND_UNIT_REFERENCES.md). Four additional naval SO remain registered in Map01.
 
 ## Artwork limitations
 
@@ -20,13 +20,13 @@ Runtime data contains 11 Hex SO, **20 Land SO**, 6 Naval SO and 13 Faction SO. A
 - Naval art is shared across factions and retains **English markings inside the ship images**.
 - Three generated alternatives are **waiting for approval and completed saves**. No partial transfer is included. Earlier SVG sources are excluded from this checkpoint.
 
-All 20 land PNGs were compared byte-for-byte with the embedded images in the original `week4UnitIcon.pptx`. No land art was regenerated. A review of the 15 newly connected roles against period sources is recorded in [LAND_UNIT_REFERENCES.md](LAND_UNIT_REFERENCES.md); these are contextual game illustrations, not verified reconstructions of every costume detail. Remaining retained source attribution is documented without a claim that every image is historically accurate.
+All 20 land PNGs were compared byte-for-byte with the embedded images in the original `week4UnitIcon.pptx`. No land art was regenerated. A review of the 15 newly connected roles against period sources is recorded in [LAND_UNIT_REFERENCES.md](../LAND_UNIT_REFERENCES.md); these are contextual game illustrations, not verified reconstructions of every costume detail. Remaining retained source attribution is documented without a claim that every image is historically accurate.
 
 ## Verification scope and remaining work
 
 Earlier working-copy batch verification completed at 2026-10-09 18:56:49 UTC: 57/57 Texture2D/Sprite imports, 11/5/6/13 data references, Map01 registration, inactive HexFog/HexDark, Coplay package import and the preserved Apache width passed with zero failures. This evidence applies to that validation copy; it does not establish gameplay, rendering, MCP connectivity or an import of the published tree with its declared editor version.
 
-Live verification on 14 October 2026 used the open `Map01` scene in Unity **6000.3.26f1** through Coplay MCP. A regression check reproduced a passenger's blocked landing before the fix and passed afterward. Ship selection, sea movement, passenger cycling, completed landing, forest clearing, town construction, opening/closing the town panel and dragging a worker were checked with simulated Input System events. Game view screenshots were inspected at 1104 x 581. This does not establish a standalone build or compatibility with the declared **6000.3.19f1** editor version. Full details and test conditions are in [INTERACTION_VERIFICATION.md](INTERACTION_VERIFICATION.md).
+Live verification on 14 October 2026 used the open `Map01` scene in Unity **6000.3.26f1** through Coplay MCP. A regression check reproduced a passenger's blocked landing before the fix and passed afterward. Ship selection, sea movement, passenger cycling, completed landing, forest clearing, town construction, opening/closing the town panel and dragging a worker were checked with simulated Input System events. Game view screenshots were inspected at 1104 x 581. This does not establish a standalone build or compatibility with the declared **6000.3.19f1** editor version. Full details and test conditions are in [INTERACTION_VERIFICATION.md](../INTERACTION_VERIFICATION.md).
 
 Follow-up testing reproduced missed clicks in the upper/lower parts of a hex: the original rectangular collider was only 1.4 units high. A six-point polygon now matches the 2.55-unit grid footprint. With normal focus/input settings restored and no virtual devices, a native right-button press/release recorded no held left button, zero drag distance, a legal highlighted destination, movement start and completed arrival. Green destination cells update when movement is exhausted. A zero-Movement passenger now remains aboard when a landing command is rejected.
 
@@ -55,6 +55,6 @@ The cyan hex is the current unit's position. Green outlines/fills mark adjacent 
 
 ## Personal repository
 
-The `student` remote points to `https://github.com/Eugo-exe/bu_colonization_demo.git`; `main` tracks `student/main`. Push subsequent committed changes with `git push student main`. The original `origin` remote is retained as the source reference. The personal repository is private, so an instructor needs repository access to review a submitted link.
+The `student` remote points to `https://github.com/Eugo-exe/bu_colonization_demo.git`; `main` tracks `student/main`. Push subsequent committed changes with `git push student main`. The original `origin` remote is retained as the source reference. Use the personal repository URL for the assignment handoff.
 
 This is an assignment checkpoint for review and continuation. It is not a completed submission or a claim that the outstanding checks passed.
