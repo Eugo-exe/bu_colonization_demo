@@ -1,6 +1,6 @@
 # Colonization assignment checkpoint
 
-**In progress — not submission-ready.** Iroquois artwork is provisional, three generated alternatives are awaiting approval and complete saved files, and Game view, the submission gameplay route and live MCP connectivity are untested.
+**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. The ship/passenger click obstruction is fixed. Personal Git delivery, the unused land artwork, and the artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
 
 The committed project version remains **6000.3.19f1**. Earlier asset validation used Unity **6000.3.26f1** in a separate working copy with pre-existing local upgrades. Unrelated Unity-version, render-setting and package-version upgrades are excluded from this checkpoint. The exact published project tree has not been reimported with its declared editor version.
 
@@ -26,6 +26,24 @@ Remaining retained source attribution is documented without a new claim that eve
 
 Earlier working-copy batch verification completed at 2026-10-09 18:56:49 UTC: 57/57 Texture2D/Sprite imports, 11/5/6/13 data references, Map01 registration, inactive HexFog/HexDark, Coplay package import and the preserved Apache width passed with zero failures. This evidence applies to that validation copy; it does not establish gameplay, rendering, MCP connectivity or an import of the published tree with its declared editor version.
 
-Game view rendering and the submission route (landing, forest clearing, town creation and unit dragging) remain unverified. Coplay package import does not prove a live MCP connection. The requested package is pinned to commit `aa5fc638d623f56178d50329d9ad8c541a57fe66`. No credentials, login or persistent MCP configuration were created.
+Live verification on 14 October 2026 used the open `Map01` scene in Unity **6000.3.26f1** through Coplay MCP. A regression check reproduced a passenger's blocked landing before the fix and passed afterward. Ship selection, sea movement, passenger cycling, completed landing, forest clearing, town construction, opening/closing the town panel and dragging a worker were checked with simulated Input System events. Game view screenshots were inspected at 1104 x 581. This does not establish a standalone build or compatibility with the declared **6000.3.19f1** editor version. Full details and test conditions are in [INTERACTION_VERIFICATION.md](INTERACTION_VERIFICATION.md).
+
+The requested Coplay package is pinned to commit `aa5fc638d623f56178d50329d9ad8c541a57fe66`. No credentials, login or persistent MCP configuration were created.
+
+## Controls
+
+Click the **Game** view after entering Play mode so Unity receives keyboard/mouse input.
+
+| Input | Action |
+| --- | --- |
+| Left click a friendly unit | Select that unit |
+| Right click an adjacent hex | Move the selected unit if its movement points and terrain permit |
+| Tab | Cycle the ship and its passengers; passengers start hidden aboard the ship |
+| Tab, then right click adjacent land | Disembark the selected passenger when the ship is beside the coast |
+| P / Backspace | Order a pioneer to clear forest / finish the turn |
+| B / Backspace | Order a pioneer to build on cleared land / finish the turn |
+| Enter / Escape | Open the town under the selected unit / close the town panel |
+
+This demo uses those controls; it has no general ship interaction menu.
 
 This is an assignment checkpoint for review and continuation. It is not a completed submission or a claim that the outstanding checks passed.

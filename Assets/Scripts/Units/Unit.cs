@@ -198,30 +198,31 @@ public class Unit : MonoBehaviour, IPointerClickHandler
             if (gameMgr.CurUnit == null)
                 return;
 
-            // A selected sprite can overlap a neighbouring hex. Resolve the hex
-            // under that pointer while preserving clicks on other units.
-            if (this == gameMgr.CurUnit)
+            // The selected unit or its transport can overlap a neighbouring hex.
+            // Route that click to the pointed hex, not another unit on our hex.
+            if (curHex == gameMgr.CurUnit.CurHex)
             {
                 var hits = new System.Collections.Generic.List<RaycastResult>();
                 EventSystem.current.RaycastAll(eventData, hits);
+                Hex pointedHex = null;
+                foreach (var hit in hits)
+                {
+                    pointedHex = hit.gameObject.GetComponent<Hex>();
+                    if (pointedHex != null)
+                        break;
+                }
                 foreach (var hit in hits)
                 {
                     Unit pointedUnit = hit.gameObject.GetComponentInParent<Unit>();
-                    if (pointedUnit != null && pointedUnit != this)
+                    if (pointedUnit != null && pointedUnit.CurHex != curHex
+                        && pointedUnit.CurHex == pointedHex)
                     {
                         ExecuteEvents.ExecuteHierarchy(hit.gameObject, eventData, ExecuteEvents.pointerClickHandler);
                         return;
                     }
                 }
-                foreach (var hit in hits)
-                {
-                    Hex pointedHex = hit.gameObject.GetComponent<Hex>();
-                    if (pointedHex == null)
-                        continue;
-                    if (gameMgr.CheckIfHexIsAdjacent(curHex, pointedHex))
-                        PrepareMoveToHex(pointedHex);
-                    return;
-                }
+                if (pointedHex != null && gameMgr.CheckIfHexIsAdjacent(curHex, pointedHex))
+                    gameMgr.CurUnit.PrepareMoveToHex(pointedHex);
                 return;
             }
 
