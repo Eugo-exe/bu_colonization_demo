@@ -51,14 +51,9 @@ public class NavalUnit : Unit
         cargoHoldNum = data.cargoHoldNum;
     }
 
-    public override void PrepareMoveToHex(Hex targetHex) //Begin to move by RC or AI auto movement
+    public override bool CanMoveToHex(Hex targetHex)
     {
-        base.PrepareMoveToHex(targetHex);
-
-        if (targetHex.HexType != HexType.Ocean)
-        {
-            StayOnHex(curHex);
-        }
+        return base.CanMoveToHex(targetHex) && targetHex.HexType == HexType.Ocean;
     }
 
     protected override void StayOnHex(Hex hex)

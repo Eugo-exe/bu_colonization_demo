@@ -160,25 +160,20 @@ public class LandUnit : Unit
         }
     }
 
+    public override bool CanMoveToHex(Hex targetHex)
+    {
+        return base.CanMoveToHex(targetHex)
+            && (targetHex.HexType != HexType.Ocean || gameMgr.CheckIfHexHasOurShipToBoard(targetHex) != null);
+    }
+
     public override void PrepareMoveToHex(Hex targetHex) //Begin to move by RC or AI auto movement
     {
-        //Debug.Log($"{unitName}:walks");
+        if (!CanMoveToHex(targetHex))
+            return;
 
-        if (targetHex.HexType != HexType.Ocean)
-        {
-            base.PrepareMoveToHex(targetHex);
-
-            if (unitStatus == UnitStatus.OnBoard)
-                MakeLandFall();
-        }
-        else if (gameMgr.CheckIfHexHasOurShipToBoard(targetHex))
-        {
-            base.PrepareMoveToHex(targetHex);
-        }
-        else
-        {
-            StayOnHex(curHex);
-        }
+        base.PrepareMoveToHex(targetHex);
+        if (targetHex.HexType != HexType.Ocean && unitStatus == UnitStatus.OnBoard)
+            MakeLandFall();
     }
 
     public void BoardingShip(NavalUnit ship)

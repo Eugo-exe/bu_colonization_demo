@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UIManager : MonoBehaviour
+public partial class UIManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject townPanel;
@@ -46,6 +46,9 @@ public class UIManager : MonoBehaviour
     {
         if (townPanel.activeSelf && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             ToggleTownPanel(false);
+
+        if (Keyboard.current != null && Keyboard.current.gKey.wasPressedThisFrame)
+            showMovementGrid = !showMovementGrid;
     }
 
     public void SetupHexSlots(Hex centerHex, Hex[] aroundHexes)

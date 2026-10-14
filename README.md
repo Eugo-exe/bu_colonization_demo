@@ -1,6 +1,6 @@
 # Colonization assignment checkpoint
 
-**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. The ship/passenger click obstruction is fixed. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. The unused land artwork and the artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
+**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid, legal-move highlights and unit/Movement HUD are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. The unused land artwork and the artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
 
 The committed project version remains **6000.3.19f1**. Earlier asset validation used Unity **6000.3.26f1** in a separate working copy with pre-existing local upgrades. Unrelated Unity-version, render-setting and package-version upgrades are excluded from this checkpoint. The exact published project tree has not been reimported with its declared editor version.
 
@@ -8,7 +8,7 @@ The committed project version remains **6000.3.19f1**. Earlier asset validation 
 
 `Assets/Textures/AssignmentArtwork` contains 11 terrain PNGs, 7 forest PNGs, 20 land unit PNGs, 6 naval PNGs and 13 faction PNGs. Texture2D sources are imported as single Sprites. `asset-manifest.json` records provenance, GUIDs, dimensions and committed-byte hashes; text metadata hashes use LF line endings.
 
-Runtime data remains 11 Hex SO, **5 Land SO**, 6 Naval SO and 13 Faction SO. The land enum has **12 entries**. **20 land images do not mean 20 playable unit types.** Four additional naval SO are registered in Map01, while existing initial Caravel spawning logic, gameplay scripts, equipment flags and existing combat/movement values remain unchanged.
+Runtime data remains 11 Hex SO, **5 Land SO**, 6 Naval SO and 13 Faction SO. The land enum has **12 entries**. **20 land images do not mean 20 playable unit types.** Four additional naval SO are registered in Map01. Initial Caravel spawning, equipment flags and combat/movement values are retained. Interaction fixes and movement feedback are documented separately below.
 
 ## Artwork limitations
 
@@ -28,6 +28,8 @@ Earlier working-copy batch verification completed at 2026-10-09 18:56:49 UTC: 57
 
 Live verification on 14 October 2026 used the open `Map01` scene in Unity **6000.3.26f1** through Coplay MCP. A regression check reproduced a passenger's blocked landing before the fix and passed afterward. Ship selection, sea movement, passenger cycling, completed landing, forest clearing, town construction, opening/closing the town panel and dragging a worker were checked with simulated Input System events. Game view screenshots were inspected at 1104 x 581. This does not establish a standalone build or compatibility with the declared **6000.3.19f1** editor version. Full details and test conditions are in [INTERACTION_VERIFICATION.md](INTERACTION_VERIFICATION.md).
 
+Follow-up testing reproduced missed clicks in the upper/lower parts of a hex: the original rectangular collider was only 1.4 units high. A six-point polygon now matches the 2.55-unit grid footprint. With normal focus/input settings restored and no virtual devices, a native right-button press/release recorded no held left button, zero drag distance, a legal highlighted destination, movement start and completed arrival. The HUD/green cells also update when movement is exhausted. A zero-Movement passenger now remains aboard when a landing command is rejected.
+
 The requested Coplay package is pinned to commit `aa5fc638d623f56178d50329d9ad8c541a57fe66`. No credentials, login or persistent MCP configuration were created.
 
 ## Controls
@@ -38,6 +40,7 @@ Click the **Game** view after entering Play mode so Unity receives keyboard/mous
 | --- | --- |
 | Left click a friendly unit | Select that unit |
 | Right click an adjacent hex | Move the selected unit if its movement points and terrain permit |
+| G | Hide/show the faint grid; movement highlights remain visible |
 | Tab | Cycle the ship and its passengers; passengers start hidden aboard the ship |
 | Tab, then right click adjacent land | Disembark the selected passenger when the ship is beside the coast |
 | P / Backspace | Order a pioneer to clear forest / finish the turn |
@@ -45,6 +48,8 @@ Click the **Game** view after entering Play mode so Unity receives keyboard/mous
 | Enter / Escape | Open the town under the selected unit / close the town panel |
 
 This demo uses those controls; it has no general ship interaction menu.
+
+The cyan hex is the current unit's position. Green outlines/fills mark adjacent destinations affordable for that unit; their numbers show movement cost. A red hovered hex is not a movement destination. When Movement reaches zero, press Backspace to finish the turn. The overlay is noninteractive and hides while the town panel is open.
 
 ## Personal repository
 

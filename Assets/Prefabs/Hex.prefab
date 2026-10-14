@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8077421746351634669}
-  - component: {fileID: 4732677179946324956}
+  - component: {fileID: 8630050451266501893}
   - component: {fileID: 6959606181565270882}
   m_Layer: 0
   m_Name: Hex
@@ -322,8 +322,8 @@ Transform:
   - {fileID: 4295239918665494813}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4732677179946324956
-BoxCollider2D:
+--- !u!60 &8630050451266501893
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -366,8 +366,15 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.4, y: 1.4}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 1.275}
+      - {x: 1.275, y: 0.6375}
+      - {x: 1.275, y: -0.6375}
+      - {x: 0, y: -1.275}
+      - {x: -1.275, y: -0.6375}
+      - {x: -1.275, y: 0.6375}
+  m_UseDelaunayMesh: 1
 --- !u!114 &6959606181565270882
 MonoBehaviour:
   m_ObjectHideFlags: 0

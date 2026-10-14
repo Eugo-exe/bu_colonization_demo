@@ -236,12 +236,17 @@ public class Unit : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public virtual bool CanMoveToHex(Hex target)
+    {
+        return target != null && target.MoveCost <= movePoint;
+    }
+
     public virtual void PrepareMoveToHex(Hex target) //Begin to move by RC or AI auto movement
     {
         //Debug.Log($"MoveCost-{target.MoveCost}");
         //Debug.Log($"UnitMovementP-{movePoint}");
 
-        if (target.MoveCost > movePoint)
+        if (!CanMoveToHex(target))
             return;
 
         isMoving = true;

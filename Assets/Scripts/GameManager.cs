@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private Grid grid;
+    public Vector2 HexCellSize { get { return grid.cellSize; } }
 
     [SerializeField]
     private Transform hexParent;
