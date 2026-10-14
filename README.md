@@ -1,6 +1,6 @@
 # Colonization assignment checkpoint
 
-**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid, legal-move highlights and unit/Movement HUD are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. All 20 land unit images are now connected to the existing data catalog. The artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
+**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid and legal-move highlights are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. All 20 land unit images are now connected to the existing data catalog. The artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
 
 The committed project version remains **6000.3.19f1**. Earlier asset validation used Unity **6000.3.26f1** in a separate working copy with pre-existing local upgrades. Unrelated Unity-version, render-setting and package-version upgrades are excluded from this checkpoint. The exact published project tree has not been reimported with its declared editor version.
 
@@ -28,7 +28,7 @@ Earlier working-copy batch verification completed at 2026-10-09 18:56:49 UTC: 57
 
 Live verification on 14 October 2026 used the open `Map01` scene in Unity **6000.3.26f1** through Coplay MCP. A regression check reproduced a passenger's blocked landing before the fix and passed afterward. Ship selection, sea movement, passenger cycling, completed landing, forest clearing, town construction, opening/closing the town panel and dragging a worker were checked with simulated Input System events. Game view screenshots were inspected at 1104 x 581. This does not establish a standalone build or compatibility with the declared **6000.3.19f1** editor version. Full details and test conditions are in [INTERACTION_VERIFICATION.md](INTERACTION_VERIFICATION.md).
 
-Follow-up testing reproduced missed clicks in the upper/lower parts of a hex: the original rectangular collider was only 1.4 units high. A six-point polygon now matches the 2.55-unit grid footprint. With normal focus/input settings restored and no virtual devices, a native right-button press/release recorded no held left button, zero drag distance, a legal highlighted destination, movement start and completed arrival. The HUD/green cells also update when movement is exhausted. A zero-Movement passenger now remains aboard when a landing command is rejected.
+Follow-up testing reproduced missed clicks in the upper/lower parts of a hex: the original rectangular collider was only 1.4 units high. A six-point polygon now matches the 2.55-unit grid footprint. With normal focus/input settings restored and no virtual devices, a native right-button press/release recorded no held left button, zero drag distance, a legal highlighted destination, movement start and completed arrival. Green destination cells update when movement is exhausted. A zero-Movement passenger now remains aboard when a landing command is rejected.
 
 The requested Coplay package is pinned to commit `aa5fc638d623f56178d50329d9ad8c541a57fe66`. No credentials, login or persistent MCP configuration were created.
 
@@ -49,7 +49,7 @@ Click the **Game** view after entering Play mode so Unity receives keyboard/mous
 
 This demo uses those controls; it has no general ship interaction menu.
 
-The cyan hex is the current unit's position. Green outlines/fills mark adjacent destinations affordable for that unit; their numbers show movement cost. A red hovered hex is not a movement destination. When Movement reaches zero, press Backspace to finish the turn. The overlay is noninteractive and hides while the town panel is open.
+The cyan hex is the current unit's position. Green outlines/fills mark adjacent destinations affordable for that unit; their numbers show movement cost. A red hovered hex is not a movement destination. When Movement reaches zero, press Backspace to finish the turn. The overlay is noninteractive and hides while the town panel is open. The top-left unit/Movement/help panel was removed at the user's request; grid lines, current-hex outlines, legal-move highlights and movement-cost numbers remain.
 
 ## Personal repository
 

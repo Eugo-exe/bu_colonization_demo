@@ -8,9 +8,6 @@ public partial class UIManager
     public bool ShowMovementGrid { get { return showMovementGrid; } }
 
     private Texture2D movementHexFill;
-    private GUIStyle movementTitleStyle;
-    private GUIStyle movementTextStyle;
-    private GUIStyle movementHintStyle;
     private GUIStyle movementCostStyle;
 
     private static readonly Color ReachableColor = new Color(0.35f, 1f, 0.58f);
@@ -99,7 +96,6 @@ public partial class UIManager
         if (hovered != null && hovered != unit.CurHex && !destinations.Contains(hovered))
             DrawHexOutline(hovered, cam, size, new Color(1f, 0.48f, 0.4f, 0.9f), 2f, false);
 
-        DrawMovementHud(unit, destinations, hovered);
     }
 
     private static Hex GetHoveredHex(Camera cam)
@@ -138,46 +134,10 @@ public partial class UIManager
             movementHexFill.Apply(false, true);
         }
 
-        if (movementTitleStyle != null)
+        if (movementCostStyle != null)
             return;
-        movementTitleStyle = new GUIStyle(GUI.skin.label) { fontSize = 19, fontStyle = FontStyle.Bold };
-        movementTitleStyle.normal.textColor = Color.white;
-        movementTextStyle = new GUIStyle(GUI.skin.label) { fontSize = 15 };
-        movementTextStyle.normal.textColor = new Color(0.8f, 0.96f, 1f);
-        movementHintStyle = new GUIStyle(GUI.skin.label) { fontSize = 12, wordWrap = true };
-        movementHintStyle.normal.textColor = new Color(0.85f, 0.89f, 0.94f);
         movementCostStyle = new GUIStyle(GUI.skin.label) { fontSize = 12, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
         movementCostStyle.normal.textColor = Color.white;
-    }
-
-    private void DrawMovementHud(Unit unit, List<Hex> destinations, Hex hovered)
-    {
-        float width = Mathf.Min(370, Screen.width - 24);
-        var panel = new Rect(12, 12, width, 152);
-        DrawOverlayTexture(panel, Texture2D.whiteTexture, new Color(0.025f, 0.055f, 0.085f, 0.93f));
-        DrawOverlayTexture(new Rect(panel.x, panel.y, 3, panel.height), Texture2D.whiteTexture, CurrentHexColor);
-        GUI.Label(new Rect(26, 22, width - 26, 26), unit.UnitName, movementTitleStyle);
-        string status = unit.UnitStatus == UnitStatus.OnBoard ? "Passenger aboard" : unit.UnitType == UnitType.Naval ? "Ship" : "Land unit";
-        GUI.Label(new Rect(26, 51, width - 26, 23), $"Movement {unit.MovePoint} / {unit.MovePointMax}   |   {status}", movementTextStyle);
-        GUI.Label(new Rect(26, 81, width - 26, 20), "Left: select    Right: move    Tab: next unit", movementHintStyle);
-        GUI.Label(new Rect(26, 102, width - 26, 20), "Green: legal move + cost    G: toggle grid", movementHintStyle);
-
-        string hint;
-        if (!GameManager.instance.PlayerTurn)
-            hint = "Waiting for the other factions...";
-        else if (unit.IsMoving)
-            hint = "Moving...";
-        else if (unit.MovePoint <= 0)
-            hint = "No movement left. Backspace: end turn.";
-        else if (unit.UnitStatus == UnitStatus.OnBoard && destinations.Count == 0)
-            hint = "Bring the ship to the coast first. Tab: select ship.";
-        else if (destinations.Count == 0)
-            hint = "No adjacent move fits this unit's terrain or movement.";
-        else if (hovered != null && destinations.Contains(hovered))
-            hint = $"{hovered.HexName}: right click once to move (cost {hovered.MoveCost}).";
-        else
-            hint = "Right click a GREEN hex once. No dragging needed.";
-        GUI.Label(new Rect(26, 125, width - 26, 32), hint, movementHintStyle);
     }
 
     private static Vector2 ScreenGuiPoint(Camera cam, Vector3 world)
