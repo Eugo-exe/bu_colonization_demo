@@ -49,6 +49,8 @@ Click the **Game** view after entering Play mode so Unity receives keyboard/mous
 
 This demo uses those controls; it has no general ship interaction menu.
 
+Fog of war is now enabled in the saved `Assets/Prefabs/Hex.prefab`: both `HexFog` and `HexDark` are active. Starting a new Play session hides unexplored hexes and reveals the player unit's position and neighbouring hexes. Previously visited areas outside current sight use the lighter fog. This setting is stored in the prefab used by Map01, rather than in temporary generated Play-mode hexes. Earlier all-visible verification describes the prior configuration. Backspace ends the turn; wait for AI movement to finish before moving again.
+
 The cyan hex is the current unit's position. Green outlines/fills mark adjacent destinations affordable for that unit; their numbers show movement cost. A red hovered hex is not a movement destination. When Movement reaches zero, press Backspace to finish the turn. The overlay is noninteractive and hides while the town panel is open. The top-left unit/Movement/help panel was removed at the user's request; grid lines, current-hex outlines, legal-move highlights and movement-cost numbers remain.
 
 ## Personal repository
