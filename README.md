@@ -1,6 +1,6 @@
 # Colonization assignment checkpoint
 
-**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. The ship/passenger click obstruction is fixed. Personal Git delivery, the unused land artwork, and the artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
+**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. The ship/passenger click obstruction is fixed. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. The unused land artwork and the artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
 
 The committed project version remains **6000.3.19f1**. Earlier asset validation used Unity **6000.3.26f1** in a separate working copy with pre-existing local upgrades. Unrelated Unity-version, render-setting and package-version upgrades are excluded from this checkpoint. The exact published project tree has not been reimported with its declared editor version.
 
@@ -45,5 +45,9 @@ Click the **Game** view after entering Play mode so Unity receives keyboard/mous
 | Enter / Escape | Open the town under the selected unit / close the town panel |
 
 This demo uses those controls; it has no general ship interaction menu.
+
+## Personal repository
+
+The `student` remote points to `https://github.com/Eugo-exe/bu_colonization_demo.git`; `main` tracks `student/main`. Push subsequent committed changes with `git push student main`. The original `origin` remote is retained as the source reference. The personal repository is private, so an instructor needs repository access to review a submitted link.
 
 This is an assignment checkpoint for review and continuation. It is not a completed submission or a claim that the outstanding checks passed.
