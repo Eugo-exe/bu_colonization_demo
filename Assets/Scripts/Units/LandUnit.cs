@@ -3,18 +3,27 @@ using UnityEngine.InputSystem;
 
 public enum LandUnitType
 {
-    FreeColonists,
-    VeteranSoldiers,
-    HardyPioneers,
-    PlainIndians,
-    TropicalIndians,
-    SeasonedScouts,
-    Farmers,
-    Fishermen,
-    Lumberjacks,
-    Carpenters,
-    OreMiners,
-    Blacksmiths
+    // Keep serialized IDs stable when adding assignment artwork.
+    FreeColonists = 0,
+    VeteranSoldiers = 1,
+    HardyPioneers = 2,
+    PlainIndians = 3,
+    TropicalIndians = 4,
+    SeasonedScouts = 5,
+    Farmers = 6,
+    Fishermen = 7,
+    Lumberjacks = 8,
+    Carpenters = 9,
+    OreMiners = 10,
+    Blacksmiths = 11,
+    FurTrappers = 12,
+    FurTraders = 13,
+    CottonPlanters = 14,
+    CottonWeavers = 15,
+    Missionaries = 16,
+    Statesmen = 17,
+    Gunsmiths = 18,
+    Criminals = 19
 }
 
 public class LandUnit : Unit

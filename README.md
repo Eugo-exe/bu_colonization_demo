@@ -1,6 +1,6 @@
 # Colonization assignment checkpoint
 
-**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid, legal-move highlights and unit/Movement HUD are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. The unused land artwork and the artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
+**In progress — not submission-ready.** Live Coplay MCP connectivity and the gameplay interaction route were checked on 14 October 2026. Ship/passenger click routing and the hex's incomplete click area are fixed. A grid, legal-move highlights and unit/Movement HUD are available; the user confirmed a stationary right-only mouse click moves the ship. The personal Git destination is [Eugo-exe/bu_colonization_demo](https://github.com/Eugo-exe/bu_colonization_demo), a private repository. All 20 land unit images are now connected to the existing data catalog. The artwork limitations below remain outstanding. See [interaction verification](INTERACTION_VERIFICATION.md).
 
 The committed project version remains **6000.3.19f1**. Earlier asset validation used Unity **6000.3.26f1** in a separate working copy with pre-existing local upgrades. Unrelated Unity-version, render-setting and package-version upgrades are excluded from this checkpoint. The exact published project tree has not been reimported with its declared editor version.
 
@@ -8,7 +8,7 @@ The committed project version remains **6000.3.19f1**. Earlier asset validation 
 
 `Assets/Textures/AssignmentArtwork` contains 11 terrain PNGs, 7 forest PNGs, 20 land unit PNGs, 6 naval PNGs and 13 faction PNGs. Texture2D sources are imported as single Sprites. `asset-manifest.json` records provenance, GUIDs, dimensions and committed-byte hashes; text metadata hashes use LF line endings.
 
-Runtime data remains 11 Hex SO, **5 Land SO**, 6 Naval SO and 13 Faction SO. The land enum has **12 entries**. **20 land images do not mean 20 playable unit types.** Four additional naval SO are registered in Map01. Initial Caravel spawning, equipment flags and combat/movement values are retained. Interaction fixes and movement feedback are documented separately below.
+Runtime data contains 11 Hex SO, **20 Land SO**, 6 Naval SO and 13 Faction SO. All **20 land enum entries** have a distinct sprite and are registered in Map01 using the original LandUnitData class, GameManager array and LandUnit prefab. Values 0–11 remain stable; eight missing names are appended as 12–19. The original five land data assets and starting ship/passenger/native composition are unchanged. The new data does not add profession bonuses or a recruitment system. See [land integration verification](LAND_UNIT_VERIFICATION.md) and [historical sources and scope](LAND_UNIT_REFERENCES.md). Four additional naval SO remain registered in Map01.
 
 ## Artwork limitations
 
@@ -20,7 +20,7 @@ Runtime data remains 11 Hex SO, **5 Land SO**, 6 Naval SO and 13 Faction SO. The
 - Naval art is shared across factions and retains **English markings inside the ship images**.
 - Three generated alternatives are **waiting for approval and completed saves**. No partial transfer is included. Earlier SVG sources are excluded from this checkpoint.
 
-Remaining retained source attribution is documented without a new claim that every image is historically accurate.
+All 20 land PNGs were compared byte-for-byte with the embedded images in the original `week4UnitIcon.pptx`. No land art was regenerated. A review of the 15 newly connected roles against period sources is recorded in [LAND_UNIT_REFERENCES.md](LAND_UNIT_REFERENCES.md); these are contextual game illustrations, not verified reconstructions of every costume detail. Remaining retained source attribution is documented without a claim that every image is historically accurate.
 
 ## Verification scope and remaining work
 
